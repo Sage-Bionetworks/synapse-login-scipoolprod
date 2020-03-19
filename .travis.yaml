@@ -1,0 +1,13 @@
+language: java
+jdk:
+  - openjdk8
+cache:
+  directories:
+  - $HOME/.m2
+stages:
+  - name: mvn_install
+jobs:
+  include:
+    - stage: mvn_install
+      script:
+        - mvn clean install --fail-never

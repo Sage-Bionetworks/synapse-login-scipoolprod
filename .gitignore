@@ -27,3 +27,9 @@ hs_err_pid*
 .classpath
 .project
 .settings/**
+
+# jetbrains
+.idea/
+
+# maven
+target/
