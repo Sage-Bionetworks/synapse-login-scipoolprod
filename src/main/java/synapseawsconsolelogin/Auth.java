@@ -68,7 +68,12 @@ public class Auth extends HttpServlet {
 
 	public static Map<String,String> getTeamToRoleMap() throws JSONException {
 		String jsonString = getProperty("TEAM_TO_ROLE_ARN_MAP");
-		JSONArray array = new JSONArray(jsonString);
+		JSONArray array;
+		try {
+			array = new JSONArray(jsonString);
+		} catch (JSONException e) {
+			throw new JSONException("Error parsing "+jsonString, e);
+		}
 		Map<String,String> result = new LinkedHashMap<String,String>();
 		for (Iterator<Object> iterator=array.iterator(); iterator.hasNext();) {
 			JSONObject entry = (JSONObject)iterator.next();
