@@ -136,7 +136,6 @@ public class Auth extends HttpServlet {
 	
 	private static String getClientSecretSynapse() {
 		String result =  getProperty("SYNAPSE_OAUTH_CLIENT_SECRET");
-		logger.log(Level.WARNING, "SYNAPSE_OAUTH_CLIENT_SECRET="+result);
 		return result;
 	}
 
