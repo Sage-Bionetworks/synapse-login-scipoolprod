@@ -303,7 +303,6 @@ public class Auth extends HttpServlet {
 			
 			AssumeRoleWithWebIdentityResult assumeRoleWithWebIdentityResult = stsClient.assumeRoleWithWebIdentity(assumeRoleWithWebIdentityRequest);
 			Credentials credentials = assumeRoleWithWebIdentityResult.getCredentials();
-			logger.log(Level.INFO, credentials.toString());
 			// redirect to AWS login
 			String redirectURL = getConsoleLoginURL(req, credentials);
 			
