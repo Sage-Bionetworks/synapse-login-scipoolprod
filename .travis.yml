@@ -13,14 +13,15 @@ install:
   - ./setup_aws_cli.sh || travis_terminate 1
   - pip install pre-commit awsebcli
 stages:
-  - name: mvn_install
+  - name: test
   - name: deploy
     if: type = push
 jobs:
   include:
-    - stage: mvn_install
+    - stage: test
       script:
-        - mvn clean install
+        - mvn clean test
     - stage: deploy
       script:
+        - mvn clean package
         - eb deploy synapse-login-scipoolprod --verbose
