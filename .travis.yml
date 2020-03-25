@@ -4,10 +4,23 @@ jdk:
 cache:
   directories:
   - $HOME/.m2
+branches:
+  only:
+  - master
+install:
+  - wget https://github.com/Sage-Bionetworks/infra-utils/archive/master.zip -O /tmp/infra-utils.zip
+  - unzip -j -n /tmp/infra-utils.zip -x "infra-utils-master/.gitignore" "infra-utils-master/LICENSE" "infra-utils-master/*.md" "infra-utils-master/aws/*"
+  - ./setup_aws_cli.sh || travis_terminate 1
+  - pip install pre-commit awsebcli
 stages:
   - name: mvn_install
+  - name: deploy
+    if: type = push
 jobs:
   include:
     - stage: mvn_install
       script:
         - mvn clean install
+    - stage: deploy
+      script:
+        - eb deploy synapse-login-scipoolprod --verbose
