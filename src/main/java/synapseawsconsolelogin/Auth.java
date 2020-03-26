@@ -305,6 +305,7 @@ public class Auth extends HttpServlet {
 			Credentials credentials = assumeRoleWithWebIdentityResult.getCredentials();
 			logger.log(Level.INFO, credentials.toString());
 			// redirect to AWS login
+			// TODO instead of redirect, just paste creds?
 			String redirectURL = getConsoleLoginURL(req, credentials);
 			
 			resp.setHeader("Location", redirectURL);
