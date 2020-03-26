@@ -57,6 +57,7 @@ public class Auth extends HttpServlet {
 
 	private static final String TOKEN_URL = "https://repo-prod.prod.sagebase.org/auth/v1/oauth2/token";
 	private static final String REDIRECT_URI = "/synapse";
+	private static final String HEALTH_URI = "/health";
 	private static final String AWS_CONSOLE_URL = "https://console.aws.amazon.com/servicecatalog";
 	private static final String AWS_SIGN_IN_URL = "https://signin.aws.amazon.com/federation";
 	private static final String USER_CLAIMS_DEFAULT="userid";
@@ -308,6 +309,8 @@ public class Auth extends HttpServlet {
 			
 			resp.setHeader("Location", redirectURL);
 			resp.setStatus(302);
+		}	else if (uri.equals(HEALTH_URI)) {
+			resp.setStatus(200);
 		} else {
 			throw new RuntimeException("Unexpected URI "+req.getRequestURI());
 		}
