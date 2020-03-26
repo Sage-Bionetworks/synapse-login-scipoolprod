@@ -304,12 +304,20 @@ public class Auth extends HttpServlet {
 			
 			AssumeRoleWithWebIdentityResult assumeRoleWithWebIdentityResult = stsClient.assumeRoleWithWebIdentity(assumeRoleWithWebIdentityRequest);
 			Credentials credentials = assumeRoleWithWebIdentityResult.getCredentials();
-			// redirect to AWS login
-			// TODO instead of redirect, just paste creds?
-			String redirectURL = getConsoleLoginURL(req, credentials);
+
+			//download creds as json object
+			resp.setContentType("application/json");
+			resp.addHeader("Content-Disposition", "attachment; filename=session-credentials.json");
+			resp.getOutputStream(String.format("{\"%1$s\":\"%2$s\",\"%3$s\":\"%4$s\",\"%5$s\":\"%6$s\"}",
+		          "sessionId", credentials.getAccessKeyId(),
+		          "sessionKey", credentials.getSecretAccessKey(),
+		          "sessionToken", credentials.getSessionToken()));
 			
+			// redirect to AWS login
+			String redirectURL = getConsoleLoginURL(req, credentials);
 			resp.setHeader("Location", redirectURL);
 			resp.setStatus(302);
+
 		}	else if (uri.equals(HEALTH_URI)) {
 			resp.setStatus(200);
 		} else {
