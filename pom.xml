@@ -140,6 +140,11 @@
 							<filtering>true</filtering>
 							<targetPath>WEB-INF/classes</targetPath>
 						</resource>
+						<resource>
+							<directory>${basedir}/.ebextensions</directory>
+							<filtering>true</filtering>
+							<targetPath>.ebextensions</targetPath>
+						</resource>
 					</webResources>
 				</configuration>
 			</plugin>
