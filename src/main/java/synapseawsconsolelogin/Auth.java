@@ -308,10 +308,13 @@ public class Auth extends HttpServlet {
 			//download creds as json object
 			resp.setContentType("application/json");
 			resp.addHeader("Content-Disposition", "attachment; filename=session-credentials.json");
-			resp.getOutputStream(String.format("{\"%1$s\":\"%2$s\",\"%3$s\":\"%4$s\",\"%5$s\":\"%6$s\"}",
-		          "sessionId", credentials.getAccessKeyId(),
-		          "sessionKey", credentials.getSecretAccessKey(),
-		          "sessionToken", credentials.getSessionToken()));
+
+			try (ServletOutputStream os=resp.getOutputStream()) {
+				os.println(String.format("{\"%1$s\":\"%2$s\",\"%3$s\":\"%4$s\",\"%5$s\":\"%6$s\"}",
+		          	"sessionId", credentials.getAccessKeyId(),
+		          	"sessionKey", credentials.getSecretAccessKey(),
+		          	"sessionToken", credentials.getSessionToken()));
+			}
 			
 			// redirect to AWS login
 			String redirectURL = getConsoleLoginURL(req, credentials);
