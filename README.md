@@ -38,14 +38,21 @@ tooling. AWS beanstalk requires files to be in a
 ```buildoutcfg
 mvn clean package
 ```
+
 ## Deployments
 We deploy this application to an existing [AWS beanstalk](https://aws.amazon.com/elasticbeanstalk/)
 container which is defined by cloudformation templates in our
 [synapse-login-aws-infra](https://github.com/Sage-Bionetworks/synapse-login-aws-infra) repo.
 
+We use the [AWS EB CLI](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb-cli3.html)
+to deploy.
+
+```
+eb deploy synapse-login-scipoolprod --profile my-aws --region us-east-1
+```
+
 ## Continuous Integration
-We have configured Travis to deploy the application using the
-[AWS EB CLI](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb-cli3.html)
+We have configured Travis CI to automatically build, test and deploy the application.
 
 ## Contributions
 Contributions are welcome
