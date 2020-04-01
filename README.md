@@ -17,12 +17,12 @@ SESSION_TIMEOUT_SECONDS=43200
 USER_CLAIMS=userid
 ```
 
-## Team to role map
+### Team to role map
 This defines the mapping between the synapse team and the AWS role. When
 mapping team ID to AWS Role, this app' uses the first match it encounters,
 iterating through the team/role list in the order given. 
 
-## Claims
+### Claims
 The `USER_CLAIMS` config is a comma separated list of claims from the list of
 available claims, given here:
 https://rest-docs.synapse.org/rest/org/sagebionetworks/repo/model/oauth/OIDCClaimName.html
@@ -33,14 +33,14 @@ For example: setting `USER_CLAIMS=userid,email` will display
 ## Building the app
 This is a java application which we build with standard [apache maven](https://maven.apache.org/what-is-maven.html)
 tooling. AWS beanstalk requires files to be in a
-[standard structure](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/java-tomcat-platform-directorystructure.html).
+[standard diredtory structure](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/java-tomcat-platform-directorystructure.html).
 
 ```buildoutcfg
 mvn clean package
 ```
 ## Deployments
 We deploy this application to an existing [AWS beanstalk](https://aws.amazon.com/elasticbeanstalk/)
-container which is defined by our our cloudformation templates in our
+container which is defined by cloudformation templates in our
 [synapse-login-aws-infra](https://github.com/Sage-Bionetworks/synapse-login-aws-infra) repo.
 
 ## Continuous Integration
