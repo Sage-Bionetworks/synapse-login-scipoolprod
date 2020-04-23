@@ -1,4 +1,6 @@
-# Overview
+# This project has been moved.  All future development for this app will be at https://github.com/Sage-Bionetworks/synapse-login-scipool
+
+
 This app logs in to the AWS Console using Synapse as the OpenID Connect
 (OIDC) identity provider
 
